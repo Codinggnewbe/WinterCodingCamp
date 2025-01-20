@@ -1,0 +1,112 @@
+문제 5. Polygon 클래스를 작성하라. 이 클래스에 필요한 매소드를 스스로 만들어 보고 Polygon 클래스를 활용하는 main() 함수도 작성하라.
+
+import java.util.*;
+
+public class makeClass {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.println("좌표를 입력해 주세요");
+		int x1 = s.nextInt();
+		int y1 = s.nextInt();
+		int x2 = s.nextInt();
+		int y2 = s.nextInt();
+		Polygon polygon1 = new Polygon(x1, y1, x2, y2);
+		
+		System.out.println("현재 내가 입력한 좌표 => " + polygon1.toString());
+		
+		System.out.println("새로운 좌표를 입력해주세요");
+		int x11 = s.nextInt();
+		int y11 = s.nextInt();
+		int x22 = s.nextInt();
+		int y22 = s.nextInt();
+		Polygon polygon2 = new Polygon(x11, y11, x22, y22);
+		System.out.println("새로 입력한 좌표 => " + polygon2.toString());
+		
+		if(polygon1.equals(polygon2) == true) {
+			System.out.println("현재 입력하신 좌표는 기존에 입력하신 좌표와 같습니다.");
+		}
+		else if(polygon1.equals(polygon2) == false) {
+			System.out.println("현재 입력하신 좌표는 기존에 입력하신 좌표와 다릅니다.");
+		}
+		
+		System.out.println("처음에 입력한 좌표를 복사하고 싶으면 1, 두번째로 입력한 좌표를 복사하고 싶으면 2를 입력해주세요.");
+		int num = s.nextInt();
+		if(num == 1) {
+			Polygon polygon3 = new Polygon(polygon1.getX1(), polygon1.getY1(), polygon1.getX2(), polygon1.getY2());
+			System.out.println("복사한 좌표 => " + polygon3.toString());
+		}
+		else if(num == 2) {
+			Polygon polygon3 = new Polygon(polygon2.getX1(), polygon2.getY1(), polygon2.getX2(), polygon2.getY2());
+			System.out.println("복사한 좌표 => " + polygon3.toString());
+		}
+		
+		System.out.println("포함여부를 알고 싶은 좌표를 입력해주세요.");
+		int xx1 = s.nextInt();
+		int yy1 = s.nextInt();
+		boolean check1 = polygon1.containes(xx1, yy1);
+		boolean check2 = polygon2.containes(xx1, yy1);
+		
+		if(check1 == true) {
+			System.out.println("해당 좌표는 polygon1에 포함됩니다.");
+		}
+		else if(check1 == false) {
+			System.out.println("해당 좌표는 polygon1에 포함되지 않습니다.");
+		}
+		
+		if(check2 == true) {
+			System.out.println("해당 좌표는 polygon2에 포함됩니다.");
+		}
+		else if(check2 == false) {
+			System.out.println("해당 좌표는 polygon2에 포함되지 않습니다.");
+		}
+	}
+}
+
+class Polygon {
+	private int x1, y1, x2, y2;
+	public Polygon(int x1, int y1, int x2, int y2) {
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+	
+	public boolean containes(int x, int y) {
+		if(this.x1 < x && this.x2 > x && this.y1 < y && this.y2 > y) {
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Polygon : (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ")";
+	}
+	
+	public int getX1() {
+		return x1;
+	}
+	
+	public int getY1() {
+		return y1;
+	}
+	
+	public int getX2() {
+		return x2;
+	}
+	
+	public int getY2() {
+		return y2;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Polygon other = (Polygon) obj;
+
+		if(this.x1 == other.x1 && this.y1 == other.y1 && this.x2 == other.x2 && this.y2 == other.y2)
+			return true;
+		else
+			return false;
+	}
+}
