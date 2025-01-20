@@ -1,0 +1,22 @@
+문제 1. 100에서 200 사이의 숫자 10개를 랜덤하게 생성하여 배열에 저장하고 평균을 출력하라.
+
+public class arrayOne {
+
+	public static void main(String[] args) {
+		int array[] = new int[10];
+		
+		int sum = 0;
+		for(int i = 0; i < array.length; i++) {
+			int a = (int)(Math.random() * 200 + 1);
+			array[i] = a;
+			sum += a;
+		}
+		
+		for(int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		System.out.println();
+		System.out.println("평균은 : " + sum / array.length);
+	}
+}
+
