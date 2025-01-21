@@ -1,0 +1,70 @@
+문제 8. 전화번호부를 콘솔 기반으로 만들어라
+(1) 이름과 전화번호를 저장하고 이름으로 검색하는 기능을 구현하라.
+(2) 전화번호부 파일에 저장하고 읽는 기능을 구현하라.
+
+import java.util.*;
+import java.io.*;
+
+public class telBook {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		HashMap<String, String> telBook = new HashMap<>();
+		
+		System.out.println("이름(홍길동)과 전화번호(010-1234-5678) 형식으로 입력하시오. 그만이라고 입력하면 입력이 끝납니다.");
+		try {
+			BufferedWriter book = new BufferedWriter(new FileWriter("src/telBook.txt", true));
+			while(true) {
+				System.out.print("이름, 전화번호>> ");
+				String name = scanner.next();
+				if(name.equals("그만")) {
+					break;
+				}
+				String tel = scanner.next();
+				telBook.put(name, tel);
+				book.write(name + " " + tel);
+				book.newLine();
+				book.flush();
+			}
+			book.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+		
+		System.out.println("이름을 입력하면 전화번호가 나옵니다.");
+		try {
+			BufferedReader bookRead = new BufferedReader(new FileReader("src/telBook.txt"));
+			String line;
+			while(true) {
+				System.out.print("이름>> ");
+				String name = scanner.next();
+				
+				if(name.equals("그만")) {
+					break;
+				}
+				
+				boolean found = false;
+				
+				try {
+					while((line = bookRead.readLine()) != null) {
+						String sort[] = line.split(" ");
+						if(sort[0].equals(name)) {
+							System.out.println(name + "의 전화번호는 " + sort[1] + "입니다.");
+							found = true;
+							break;
+						}
+					}
+					if(!found) {
+						System.out.println(name + "은(는) 없는 사람입니다.");
+					}
+					bookRead.close();
+	                bookRead = new BufferedReader(new FileReader("src/telBook.txt"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}
