@@ -1,0 +1,60 @@
+문제 11. 1에서 10까지 숫자를 패널의 랜덤한 위치에 뿌리고 사용자가 순서대로 클릭하면 게임이 끝나고 다시 랜덤하게 출력하도록 하라. 이때 게임이 끝나면 JOptionPane의 showConfirmDialog()를 이용하여 계속할 것인지를 묻고 이에 따라 진행하라.
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+public class clickGame extends JFrame{
+	public clickGame() {
+		setTitle("Ten 레이블 클릭");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setContentPane(new MyPanel());
+		setSize(500, 500);
+		setVisible(true);
+	}
+	
+	class MyPanel extends JPanel{
+		private int arr[] = { 1, 2, 3 , 4, 5, 6, 7, 8, 9, 10};
+		public MyPanel() {
+			setLayout(null);
+			for(int i = 0; i < arr.length; i++) {
+				int x = (int)(Math.random() * 400 + 1);
+				int y = (int)(Math.random() * 400 + 1);
+				JLabel label = new JLabel(Integer.toString(arr[i]));
+				label.setSize(30, 30);
+				label.setLocation(x, y);
+				this.add(label);
+				
+				label.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						remove(label);
+						revalidate();
+						repaint();
+
+						if(getComponentCount() == 0) {
+							int res = JOptionPane.showConfirmDialog(null, "모든 레이블이 삭제되었습니다. 다시 시작하려면 yes를 눌러주세요.", "YES/NO", 
+									JOptionPane.YES_NO_OPTION);
+							if(res == JOptionPane.YES_OPTION) {
+								removeAll();
+								revalidate();
+								repaint();
+								setContentPane(new MyPanel());
+								revalidate();
+								repaint();
+							}
+							else if(res == JOptionPane.NO_OPTION) {
+								System.exit(0);
+							}
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		new clickGame();
+	}
+}
