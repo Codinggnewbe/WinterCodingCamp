@@ -1,0 +1,265 @@
+문제 9. 커피 자판기 시뮬레이터를 작서하라.
+- 커피의 종류는 커피만 들어있는 Black Coffee, 커피와 설탕이 들어있는 Sugar Coffee, 커피와 설탕과 크림이 모두 들어있는 Dabang Coffee의 3가지만 지원한다.
+- 화면을 통해 현재 남아있는 컵, 커피, 물, 설탕, 크림의 양을 보여주며 커피를 뽑을 때마다 이 값들이 모두 조절된다.
+- Reset 버튼을 두고 이 버튼을 누르면 컵, 커피, 물, 설탕, 크림이 통에 가득 채워진다.
+- 커피를 선택하였을 때 재료가 부족하면 커피를 먹을 수 없다는 경고창을 출력한다.
+- 커피를 선택하였을 때 커피가 나오면 이미지를 출력하고 커피가 나왔음을 알리는 경고창을 출력한다.
+
+
+
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class vendingMachine extends JFrame{
+	private NorthPanel nPanel = new NorthPanel();
+	private SouthPanel sPanel = new SouthPanel();
+	private CenterPanel cPanel = new CenterPanel();
+
+	JProgressBar progressCup;
+	JProgressBar progressCoffee;
+	JProgressBar progressWater;
+	JProgressBar progressSugar;
+	JProgressBar progressCream;
+	private static int cup = 10;
+	private static int coffee = 10;
+	private static int water = 10;
+	private static int sugar = 10;
+	private static int cream = 10;
+	
+	public vendingMachine() {
+		setTitle("커피 머신");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(700, 500);
+		this.setResizable(false);
+		Container c = this.getContentPane();
+		
+		c.setLayout(new BorderLayout());
+		c.add(nPanel, BorderLayout.NORTH);
+		c.add(sPanel, BorderLayout.SOUTH);
+		c.add(cPanel, BorderLayout.CENTER);
+		
+		setVisible(true);
+	}
+	
+	class NorthPanel extends JPanel{
+		private JLabel label = new JLabel("Welcome, Hot Coffee!");
+		
+		public NorthPanel() {
+			setBackground(Color.MAGENTA);
+			add(label);
+		}
+	}
+	
+	public void blackCoffeeDown() {
+		if(cup == 0 || coffee == 0 || water == 0) {
+			JOptionPane.showMessageDialog(null, "부족한 것이 있습니다. 채워주세요.", "커피 자판기 경고", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			cPanel.tFImag(true);
+			cup--;
+			coffee--;
+			water--;
+			progressCup.setValue(cup);
+			progressCoffee.setValue(coffee);
+			progressWater.setValue(water);
+			JOptionPane.showMessageDialog(null, "뜨거워요. 즐거운 하루!", "커피 나왔습니다!", JOptionPane.INFORMATION_MESSAGE);
+			cPanel.tFImag(false);
+		}
+	}
+	
+	public void sugarCoffeeDown() {
+		if(cup == 0 || coffee == 0 || water == 0 || sugar == 0) {
+			JOptionPane.showMessageDialog(null, "부족한 것이 있습니다. 채워주세요.", "커피 자판기 경고", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			cPanel.tFImag(true);
+			cup--;
+			coffee--;
+			water--;
+			sugar--;
+			progressCup.setValue(cup);
+			progressCoffee.setValue(coffee);
+			progressWater.setValue(water);
+			progressSugar.setValue(sugar);
+			JOptionPane.showMessageDialog(null, "뜨거워요. 즐거운 하루!", "커피 나왔습니다!", JOptionPane.INFORMATION_MESSAGE);
+			cPanel.tFImag(false);
+		}
+	}
+	
+	public void dabangCoffeeDown() {
+		if(cup == 0 || coffee == 0 || water == 0 || sugar == 0 || cream == 0) {
+			JOptionPane.showMessageDialog(null, "부족한 것이 있습니다. 채워주세요.", "커피 자판기 경고", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			cPanel.tFImag(true);
+			cup--;
+			coffee--;
+			water--;
+			sugar--;
+			cream--;
+			progressCup.setValue(cup);
+			progressCoffee.setValue(coffee);
+			progressWater.setValue(water);
+			progressSugar.setValue(sugar);
+			progressCream.setValue(cream);
+			JOptionPane.showMessageDialog(null, "뜨거워요. 즐거운 하루!", "커피 나왔습니다!", JOptionPane.INFORMATION_MESSAGE);
+			cPanel.tFImag(false);
+		}
+	}
+	
+	public void reset() {
+		cup = 10;
+		coffee = 10;
+		water = 10;
+		sugar = 10;
+		cream = 10;
+		progressCup.setValue(cup);
+		progressCoffee.setValue(coffee);
+		progressWater.setValue(water);
+		progressSugar.setValue(sugar);
+		progressCream.setValue(cream);
+	}
+	
+	class SouthPanel extends JPanel{
+		private JButton blackBtn = new JButton("Black Coffee");
+		private JButton sugarBtn = new JButton("Sugar Coffee");
+		private JButton dabangBtn = new JButton("Dabang Coffee");
+		private JButton resetBtn = new JButton("Reset");	
+		
+		public SouthPanel() {
+			setLayout(new FlowLayout());
+
+			blackBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					blackCoffeeDown();
+				}
+			});
+			add(blackBtn);
+			
+			sugarBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					sugarCoffeeDown();
+				}
+			});
+			add(sugarBtn);
+			
+			dabangBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dabangCoffeeDown();
+				}
+			});
+			add(dabangBtn);
+			
+			resetBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(null, "재료 충전!", "재료 충전!", JOptionPane.INFORMATION_MESSAGE);
+					reset();
+				}
+			});
+			add(resetBtn);
+		}
+	}
+	
+	class CenterPanel extends JPanel{
+		private ImageIcon icon = new ImageIcon("src/coffee.jpg");
+		private Image img = icon.getImage();
+		private boolean showImg = false;
+		
+		public void tFImag(boolean showFlag) {
+			showImg = showFlag;
+			repaint();
+		}
+	
+		public void paint(Graphics g) {
+			super.paint(g);
+			if(showImg) {
+				g.drawImage(img, 330, 300, 50, 50, this);
+			}
+		}
+		
+		public CenterPanel() {
+			setLayout(new FlowLayout(FlowLayout.CENTER, 40, 20));
+			
+			JPanel cupPanel = new JPanel();
+			cupPanel.setLayout(new BoxLayout(cupPanel, BoxLayout.Y_AXIS));
+			cupPanel.setPreferredSize(new Dimension(50, 200));
+			cupPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel cupLabel = new JLabel("Cup");
+			cupLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			progressCup = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+			progressCup.setValue(cup);
+			progressCup.setForeground(Color.MAGENTA);
+			progressCup.setMaximumSize(new Dimension(500, 200));
+			cupPanel.add(progressCup);
+			cupPanel.add(cupLabel);
+			add(cupPanel);
+			
+			JPanel coffeePanel = new JPanel();	
+			coffeePanel.setLayout(new BoxLayout(coffeePanel, BoxLayout.Y_AXIS));
+			coffeePanel.setPreferredSize(new Dimension(50, 200));
+			coffeePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel coffeeLabel = new JLabel("Coffee");
+			coffeeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			progressCoffee = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+			progressCoffee.setValue(coffee);
+			progressCoffee.setForeground(Color.MAGENTA);
+			progressCoffee.setMaximumSize(new Dimension(500, 200));
+			coffeePanel.add(progressCoffee);
+			coffeePanel.add(coffeeLabel);
+			add(coffeePanel);
+			
+			JPanel waterPanel = new JPanel();
+			waterPanel.setLayout(new BoxLayout(waterPanel, BoxLayout.Y_AXIS));
+			waterPanel.setPreferredSize(new Dimension(50, 200));
+			waterPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel waterLabel = new JLabel("Water");
+			waterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			progressWater = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+			progressWater.setValue(water);
+			progressWater.setForeground(Color.MAGENTA);
+			progressWater.setMaximumSize(new Dimension(500, 200));
+			waterPanel.add(progressWater);
+			waterPanel.add(waterLabel);
+			add(waterPanel);
+			
+			JPanel sugarPanel = new JPanel();
+			sugarPanel.setLayout(new BoxLayout(sugarPanel, BoxLayout.Y_AXIS));
+			sugarPanel.setPreferredSize(new Dimension(50, 200));
+			sugarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel sugarLabel = new JLabel("Sugar");
+			sugarLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			progressSugar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+			progressSugar.setValue(sugar);
+			progressSugar.setForeground(Color.MAGENTA);
+			progressSugar.setMaximumSize(new Dimension(500, 200));
+			sugarPanel.add(progressSugar);
+			sugarPanel.add(sugarLabel);
+			add(sugarPanel);
+			
+			JPanel creamPanel = new JPanel();
+			creamPanel.setLayout(new BoxLayout(creamPanel, BoxLayout.Y_AXIS));
+			creamPanel.setPreferredSize(new Dimension(50, 200));
+			creamPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			JLabel creamLabel = new JLabel("Cream");
+			creamLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			progressCream = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+			progressCream.setValue(cream);
+			progressCream.setForeground(Color.MAGENTA);
+			progressCream.setMaximumSize(new Dimension(500, 200));
+			creamPanel.add(progressCream);
+			creamPanel.add(creamLabel);
+			add(creamPanel);
+			}
+		}
+	
+	public static void main(String[] args) {
+		new vendingMachine();
+	}
+}
