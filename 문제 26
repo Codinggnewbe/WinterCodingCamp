@@ -1,0 +1,43 @@
+문제 26. 인터페이스 AdderInterface의 코드는 다음과 같다.
+interface AdderInterface {
+    int add(int x, int y);
+    int add(int n);
+}
+
+AdderInterface를 상속받은 클래스 MyAdder를 작성하여 다음 main()을 실행할 때 아래 실행결과와 같이 출력되도록 하라.
+public static void main(String[] args) {
+		MyAdder adder = new MyAdder();
+		System.out.println(adder.add(5, 10));
+		System.out.println(adder.add(10));
+	}
+
+결과 : 15 / 55
+
+
+interface AdderInterface {
+	int add(int x, int y);
+	int add(int n);
+}
+
+public class MyAdder implements AdderInterface{
+	public static void main(String[] args) {
+		MyAdder adder = new MyAdder();
+		System.out.println(adder.add(5, 10));
+		System.out.println(adder.add(10));
+	}
+	
+	@Override
+	public int add(int x, int y) {
+		return x + y;
+	}
+	
+	@Override
+	public int add(int n) {
+		int sum = 0;
+		for(int i = 1; i <= n; i++) {
+			sum += i;
+		}
+		
+		return sum;
+	}
+}
