@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class clickGame extends JFrame{
-	public clickGame() {
+public class ClickGame extends JFrame{
+	public ClickGame() {
 		setTitle("Ten 레이블 클릭");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new MyPanel());
