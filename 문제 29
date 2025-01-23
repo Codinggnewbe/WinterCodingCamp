@@ -1,0 +1,40 @@
+문제 29.쥐가 이동한 각 위치를 저장하고 이들로부터 총 이동거리를 구하고자 한다. ArrayList 컬렉션에 쥐의 위치를 5개 입력받아 삽입한후 총 길이를 구하라. 시작 위치는 (0,0)이며, (0,0)으로 돌아온다.
+
+
+import java.util.*;
+
+public class TravelManager {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<Integer> xLocation = new ArrayList<>();
+		ArrayList<Integer> yLocation = new ArrayList<>();
+		
+		System.out.println("쥐가 이동한 위치(x,y)를 5개 입력하라.");
+		
+		for(int i = 0; i < 5; i++) {
+			System.out.print(">> ");
+			int x = scanner.nextInt();
+			int y = scanner.nextInt();
+			xLocation.add(x);
+			yLocation.add(y);
+		}
+		
+		double sum = 0;
+		sum += Math.sqrt(xLocation.get(0)*xLocation.get(0) + yLocation.get(0)*yLocation.get(0));
+		
+		for(int i = 0; i < xLocation.size() - 1; i++) {
+			int x1 = xLocation.get(i);
+			int y1 = yLocation.get(i);
+			int x2 = xLocation.get(i + 1);
+			int y2 = yLocation.get(i + 1);
+			
+			sum += Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+		}
+		
+		int x = xLocation.size() - 1;
+		int y = yLocation.size() - 1;
+		
+		sum += Math.sqrt(xLocation.get(x)*xLocation.get(x) + yLocation.get(y)*yLocation.get(y));
+		System.out.println("총 이동 거리는 " + sum);
+	}
+}
