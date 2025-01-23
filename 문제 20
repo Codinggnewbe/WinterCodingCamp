@@ -1,8 +1,9 @@
 문제 20. 돈의 액수를 입력받아 오만원권, 일만원권, 일천원권, 500원짜리 동전, 100원짜리 동전, 10원짜리 동전, 1원짜리 동전 각 몇 개로 변환되는지 출력하라.
 
+
 import java.util.*;
 
-public class money {
+public class Money {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("돈의 액수를 입력하세요>> ");
