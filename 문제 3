@@ -1,8 +1,9 @@
 문제 3. 두 개의 정수 배열이 같은지 판별하는 equalInt(int [], int [])를 작성하고, 두 개의 정수 배열을 만들고 equalInt() 함수를 호출하여 판별하는 main() 함수로 작성하라.
 
+
 import java.util.*;
 
-public class arrayThree {
+public class ArrayThree {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		
