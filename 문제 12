@@ -6,10 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class telBookSwing extends JFrame{
+public class TelBookSwing extends JFrame{
 	HashMap<String, String> telBook = new HashMap<>();
 	
-	public telBookSwing() {
+	public TelBookSwing() {
 		setTitle("스윙 이용하여 전화번호부 만들기");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 500);
@@ -100,6 +100,6 @@ public class telBookSwing extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new telBookSwing();
+		new TelBookSwing();
 	}
 }
