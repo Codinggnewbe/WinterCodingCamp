@@ -1,0 +1,39 @@
+문제 27. 다음과 같이 +로 연결된 뎃셈식을 입력받아 뎃셈 결과를 출력하는 프로그램을 작성하라. StringTokenizer와 Integer.parseInt(), Strig의 trim()을 활용하라.
+
+import java.util.StringTokenizer;
+
+public class Tokenizer {
+	public static void main(String[] args) {
+		String ex = "2 + 5 + 6 + 10";
+		System.out.println(ex);
+		StringTokenizer st = new StringTokenizer(ex, "+");
+		
+		int sum = 0;
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken().trim();
+			sum += Integer.parseInt(token);
+		}
+		System.out.println("합은 " + sum);
+	}
+}
+
+========================================================
+trim 안쓰는 버전
+
+import java.util.StringTokenizer;
+
+public class Tokenizer {
+	public static void main(String[] args) {
+		String ex = "2 + 5 + 6 + 10";
+		System.out.println(ex);
+		StringTokenizer st = new StringTokenizer(ex, " + "); // + 앞뒤로 빈칸 넣어주면 됨
+		
+		int sum = 0;
+		while(st.hasMoreTokens()) {
+			String token = st.nextToken();
+			System.out.println(token);
+			sum += Integer.parseInt(token);
+		}
+		System.out.println("합은 " + sum);
+	}
+}
