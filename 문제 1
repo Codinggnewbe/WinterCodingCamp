@@ -1,7 +1,7 @@
 문제 1. 100에서 200 사이의 숫자 10개를 랜덤하게 생성하여 배열에 저장하고 평균을 출력하라.
 
-public class arrayOne {
 
+public class ArrayOne {
 	public static void main(String[] args) {
 		int array[] = new int[10];
 		
@@ -19,4 +19,3 @@ public class arrayOne {
 		System.out.println("평균은 : " + sum / array.length);
 	}
 }
-
