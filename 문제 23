@@ -1,9 +1,9 @@
 문제 23. 컴퓨터와 사용자의 가위바위보 게이 프로그램을 작성하라. 사용자가 입력하고 <Enter> 키를 치면, 컴퓨터는 랜덤하게 가위, 바위, 보 중 하나를 선택한다. 그리고 누가 이겼는지 출력한다. "그만"을 입력하면 게임을 종료한다.
 
+
 import java.util.*;
 
-public class rspGame {
-
+public class RspGame {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
