@@ -2,10 +2,11 @@
 (1) 이름과 전화번호를 저장하고 이름으로 검색하는 기능을 구현하라.
 (2) 전화번호부 파일에 저장하고 읽는 기능을 구현하라.
 
+
 import java.util.*;
 import java.io.*;
 
-public class telBook {
+public class TelBook {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		HashMap<String, String> telBook = new HashMap<>();
@@ -27,7 +28,7 @@ public class telBook {
 			}
 			book.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			return;
 		}
 		System.out.println();
 		
@@ -60,11 +61,11 @@ public class telBook {
 					bookRead.close();
 	                bookRead = new BufferedReader(new FileReader("src/telBook.txt"));
 				} catch (IOException e) {
-					e.printStackTrace();
+					return;
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			return;
 		}
 	}
 }
