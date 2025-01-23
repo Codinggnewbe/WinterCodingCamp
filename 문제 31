@@ -1,0 +1,27 @@
+문제 31. 각 버튼의 배경색을 다음 그림과 같이 설정하라.
+
+
+import java.awt.*;
+import javax.swing.*;
+
+public class TenColorButtonsFrame extends JFrame{
+	private Color[] color = { Color.RED, Color.orange, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA
+			, Color.GRAY, Color.PINK, Color.BLACK, Color.LIGHT_GRAY};
+	
+	public TenColorButtonsFrame() {
+		setTitle("Ten Color Buttons Frame");
+		setSize(800,400);
+		setLayout(new GridLayout());
+		for(int i = 0; i < 10; i++) {
+			JButton button = new JButton(Integer.toString(i));
+			button.setOpaque(true);
+			button.setBackground(color[i]);
+			add(button);
+		}
+		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new TenColorButtonsFrame();
+	}
+}
