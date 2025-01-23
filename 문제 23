@@ -1,0 +1,44 @@
+문제 23. 컴퓨터와 사용자의 가위바위보 게이 프로그램을 작성하라. 사용자가 입력하고 <Enter> 키를 치면, 컴퓨터는 랜덤하게 가위, 바위, 보 중 하나를 선택한다. 그리고 누가 이겼는지 출력한다. "그만"을 입력하면 게임을 종료한다.
+
+import java.util.*;
+
+public class rspGame {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		String rsp[] = { "가위", "바위", "보" };
+		System.out.println("컴퓨터와 가위 바위 보 게임을 합니다.");
+		while(true) {
+			System.out.print("가위 바위 보!>> ");
+			String user = scanner.next();
+			if(user.equals("그만")) {
+				System.out.println("프로그램을 종료합니다...");
+				break;
+			}
+			int num = (int)(Math.random() * 3);
+			
+			if(user.equals(rsp[num])) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 비겼습니다.");
+			}
+			else if(rsp[num].equals("가위") && user.equals("보")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 컴퓨터가 이겼습니다.");
+			}
+			else if(rsp[num].equals("가위") && user.equals("바위")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 사용자가 이겼습니다.");
+			}
+			else if(rsp[num].equals("바위") && user.equals("보")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 사용자가 이겼습니다.");
+			}
+			else if(rsp[num].equals("바위") && user.equals("가위")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 컴퓨터가 이겼습니다.");
+			}
+			else if(rsp[num].equals("보") && user.equals("바위")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 컴퓨터가 이겼습니다.");
+			}
+			else if(rsp[num].equals("보") && user.equals("가위")) {
+				System.out.println("사용자 = " + user + ", 컴퓨터 = " + rsp[num] + ", 사용자가 이겼습니다.");
+			}
+		}
+	}
+}
