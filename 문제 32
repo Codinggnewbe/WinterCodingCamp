@@ -1,0 +1,53 @@
+문제 32. JLabel 컴포넌트를 이용하여 "Love Java"를 출력하고, + 키를 치면 폰트 크기를 5픽셀씩 키우고, - 키를 치면 폰트 크기를 5픽셀씩 줄이는 스윙 응용프로그램을 작성하라. 5픽셀 이하로 작아지지 않도록 하라
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class FontSize extends JFrame{
+	private JLabel la = new JLabel("Love Java");
+	
+	public FontSize() {
+		setTitle("+, - 키로 폰트 크기 조절");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(600, 400);
+		setContentPane(new MyPanel());
+		setVisible(true);
+	}
+	
+	class MyPanel extends JPanel{
+		public MyPanel() {
+			la.setFont(new Font("Arial", Font.PLAIN, 10));
+			add(la);
+			setFocusable(true);
+			requestFocus();
+			addKeyListener(new MyKeyListener());
+		}
+	}
+	
+	class MyKeyListener extends KeyAdapter{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int keyCode = e.getKeyCode();
+			Font f = la.getFont();
+			int size = f.getSize();
+			
+			switch(keyCode) {
+				//case KeyEvent.VK_PLUS:
+				case KeyEvent.VK_EQUALS:
+					la.setFont(new Font("Arial", Font.PLAIN, size + 5));
+					break;
+				case KeyEvent.VK_MINUS:
+                    if (size > 5) {
+                        la.setFont(new Font("Arial", Font.PLAIN, size - 5));
+                    }
+					break;
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		new FontSize();
+	}
+}
