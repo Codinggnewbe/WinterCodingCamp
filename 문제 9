@@ -6,14 +6,13 @@
 - 커피를 선택하였을 때 커피가 나오면 이미지를 출력하고 커피가 나왔음을 알리는 경고창을 출력한다.
 
 
-
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class vendingMachine extends JFrame{
+public class VendingMachine extends JFrame{
 	private NorthPanel nPanel = new NorthPanel();
 	private SouthPanel sPanel = new SouthPanel();
 	private CenterPanel cPanel = new CenterPanel();
@@ -29,7 +28,7 @@ public class vendingMachine extends JFrame{
 	private static int sugar = 10;
 	private static int cream = 10;
 	
-	public vendingMachine() {
+	public VendingMachine() {
 		setTitle("커피 머신");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 500);
@@ -260,6 +259,6 @@ public class vendingMachine extends JFrame{
 		}
 	
 	public static void main(String[] args) {
-		new vendingMachine();
+		new VendingMachine();
 	}
 }
